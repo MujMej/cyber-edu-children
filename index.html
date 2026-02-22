@@ -5,27 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cyber Education – Access</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    body{margin:0;font-family:Montserrat,system-ui;background:#0f0f12;color:#fff;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}
-    .card{width:min(520px,100%);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:28px}
-    h1{margin:0 0 8px;font-size:28px}
-    p{margin:0 0 14px;opacity:.85;line-height:1.4}
-    input{width:100%;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.25);color:#fff;font-size:16px;outline:none}
-    button{width:100%;margin-top:12px;padding:14px 16px;border-radius:16px;border:none;background:#8b1535;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
-    .err{margin-top:10px;color:#ff6b6b;font-weight:600;display:none}
-    .tiny{margin-top:10px;font-size:12px;opacity:.65}
+    :root{
+      --bg:#0B1010;
+      --text:#E9EEE9;
+      --primary:#0F6B52;   /* emerald */
+      --accent:#D9B35A;    /* gold */
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --field: rgba(0,0,0,0.28);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Montserrat,system-ui;
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(15,107,82,0.25), transparent 55%),
+                  radial-gradient(900px 500px at 80% 20%, rgba(217,179,90,0.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+
+    .card{
+      width:min(560px, 100%);
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:28px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:28px;
+      letter-spacing:0.2px;
+    }
+
+    p{
+      margin:0 0 16px;
+      opacity:0.86;
+      line-height:1.45;
+    }
+
+    .field{
+      width:100%;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:var(--field);
+      color:var(--text);
+      font-size:16px;
+      outline:none;
+    }
+
+    .field::placeholder{opacity:0.6}
+
+    .btn{
+      width:100%;
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:none;
+      background:var(--primary);
+      color:#fff;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer;
+      transition:transform .15s ease, background .15s ease, color .15s ease;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background:var(--accent);
+      color:#0b1220;
+    }
+
+    .err{
+      margin-top:12px;
+      color:#ff6b6b;
+      font-weight:600;
+      display:none;
+    }
+
+    @media (max-width: 420px){
+      .card{padding:22px}
+      h1{font-size:24px}
+    }
   </style>
 </head>
+
 <body>
   <main class="card">
     <h1>Restricted materials</h1>
     <p>Enter the access code to view presentations.</p>
 
-    <input id="code" type="password" placeholder="Access code" autocomplete="off" />
-    <button id="btn">Unlock</button>
+    <input id="code" class="field" type="password" placeholder="Access code" autocomplete="off" />
+    <button id="btn" class="btn">Unlock</button>
 
     <div class="err" id="err">Wrong code.</div>
-    <div class="tiny">Soft restriction (GitHub Pages).</div>
   </main>
 
   <script>

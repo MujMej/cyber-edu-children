@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body{margin:0;font-family:Montserrat,system-ui;background:#0f0f12;color:#fff;padding:24px}
+    .top{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;cursor:pointer;text-decoration:none}
+    h1{margin:0;font-size:22px}
+    .wrap{max-width:1100px;margin:14px auto 0}
+    iframe{width:100%;height:78vh;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:#fff}
+    .muted{opacity:.75;font-size:13px;margin-top:10px}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="btn" href="materials.html">← Back</a>
+    <h1 id="t">Presentation</h1>
+    <button class="btn" id="lock">Lock</button>
+  </header>
+
+  <main class="wrap">
+    <iframe id="frame" title="PDF viewer"></iframe>
+    <div class="muted">Toolbar is hidden where supported (soft restriction).</div>
+  </main>
+
+  <script>
+    const KEY="cyberEduUnlocked";
+    if(sessionStorage.getItem(KEY)!=="true"){
+      location.href="index.html";
+    }
+
+    document.getElementById("lock").addEventListener("click",()=>{
+      sessionStorage.removeItem(KEY);
+      location.href="index.html";
+    });
+
+    const allowed=new Set([
+      "Tema1.pdf","Tema2.pdf","Tema3.pdf","Tema4.pdf","Tema5.pdf",
+      "Tema6.pdf","Tema7.pdf","Tema8.pdf","Tema9.pdf","Tema10.pdf"
+    ]);
+
+    const f=new URLSearchParams(location.search).get("f");
+    if(!allowed.has(f)){
+      location.href="materials.html";
+    }else{
+      document.getElementById("t").textContent=f.replace(".pdf","");
+      // Load from CV repo assets via GitHub Pages URL:
+      const base="https://mujmej.github.io/CV/assets/";
+      document.getElementById("frame").src = base + encodeURIComponent(f) + "#toolbar=0&navpanes=0";
+    }
+
+    // Soft: disable right click
+    document.addEventListener("contextmenu",(e)=>e.preventDefault());
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Education – Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body{margin:0;font-family:Montserrat,system-ui;background:#0f0f12;color:#fff;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}
+    .card{width:min(520px,100%);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:28px}
+    h1{margin:0 0 8px;font-size:28px}
+    p{margin:0 0 14px;opacity:.85;line-height:1.4}
+    input{width:100%;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.25);color:#fff;font-size:16px;outline:none}
+    button{width:100%;margin-top:12px;padding:14px 16px;border-radius:16px;border:none;background:#8b1535;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+    .err{margin-top:10px;color:#ff6b6b;font-weight:600;display:none}
+    .tiny{margin-top:10px;font-size:12px;opacity:.65}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Restricted materials</h1>
+    <p>Enter the access code to view presentations.</p>
+
+    <input id="code" type="password" placeholder="Access code" autocomplete="off" />
+    <button id="btn">Unlock</button>
+
+    <div class="err" id="err">Wrong code.</div>
+    <div class="tiny">Soft restriction (GitHub Pages).</div>
+  </main>
+
+  <script>
+    const KEY="cyberEduUnlocked";
+    const CODE="Cyb£RXeRoy!26";
+
+    if(sessionStorage.getItem(KEY)==="true"){
+      location.href="materials.html";
+    }
+
+    const input=document.getElementById("code");
+    const btn=document.getElementById("btn");
+    const err=document.getElementById("err");
+
+    function check(){
+      err.style.display="none";
+      if((input.value||"").trim()===CODE){
+        sessionStorage.setItem(KEY,"true");
+        location.href="materials.html";
+      }else{
+        err.style.display="block";
+      }
+    }
+
+    btn.addEventListener("click",check);
+    input.addEventListener("keydown",(e)=>{ if(e.key==="Enter") check(); });
+  </script>
+</body>
+</html>

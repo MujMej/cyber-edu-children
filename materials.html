@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Education – Materials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body{margin:0;font-family:Montserrat,system-ui;background:#0f0f12;color:#fff;padding:24px}
+    .top{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    h1{margin:0;font-size:28px}
+    .btn{padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;cursor:pointer}
+    .grid{max-width:1100px;margin:18px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:18px}
+    .title{margin:0 0 6px;font-size:18px}
+    .desc{margin:0;opacity:.8;line-height:1.4}
+    .open{margin-top:12px;width:100%;padding:12px 14px;border-radius:16px;border:none;background:#8b1535;color:#fff;font-weight:700;cursor:pointer}
+    .note{max-width:1100px;margin:14px auto 0;opacity:.7;font-size:13px}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <h1>Presentations</h1>
+    <button class="btn" id="lock">Lock</button>
+  </header>
+
+  <main class="grid" id="grid"></main>
+  <p class="note">PDFs are loaded from your CV site assets: <span style="opacity:.9">mujmej.github.io/CV/assets/</span></p>
+
+  <script>
+    const KEY="cyberEduUnlocked";
+    if(sessionStorage.getItem(KEY)!=="true"){
+      location.href="index.html";
+    }
+
+    document.getElementById("lock").addEventListener("click",()=>{
+      sessionStorage.removeItem(KEY);
+      location.href="index.html";
+    });
+
+    const items=[
+      {file:"Tema1.pdf", title:"Tema 1", desc:"Internet kao javni prostor"},
+      {file:"Tema2.pdf", title:"Tema 2", desc:"Digitalni trag"},
+      {file:"Tema3.pdf", title:"Tema 3", desc:"Lični podaci i privatnost"},
+      {file:"Tema4.pdf", title:"Tema 4", desc:"Lozinke i zaštita naloga"},
+      {file:"Tema5.pdf", title:"Tema 5", desc:"Ko je s druge strane ekrana?"},
+      {file:"Tema6.pdf", title:"Tema 6", desc:"Društvene mreže i uticaj na mozak"},
+      {file:"Tema7.pdf", title:"Tema 7", desc:"Cyberbullying i pozitivna zajednica"},
+      {file:"Tema8.pdf", title:"Tema 8", desc:"Lažne vijesti i kritičko razmišljanje"},
+      {file:"Tema9.pdf", title:"Tema 9", desc:"AI i deepfake tehnologija"},
+      {file:"Tema10.pdf", title:"Tema 10", desc:"Incident response"},
+    ];
+
+    const grid=document.getElementById("grid");
+    grid.innerHTML=items.map(i=>`
+      <section class="card">
+        <h2 class="title">${i.title}</h2>
+        <p class="desc">${i.desc}</p>
+        <button class="open" onclick="location.href='viewer.html?f=${encodeURIComponent(i.file)}'">Open (view-only)</button>
+      </section>
+    `).join("");
+  </script>
+</body>
+</html>

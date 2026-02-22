@@ -3,29 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Viewer</title>
+  <title>Presentation Viewer</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    body{margin:0;font-family:Montserrat,system-ui;background:#0f0f12;color:#fff;padding:24px}
-    .top{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .btn{padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;cursor:pointer;text-decoration:none}
-    h1{margin:0;font-size:22px}
-    .wrap{max-width:1100px;margin:14px auto 0}
-    iframe{width:100%;height:78vh;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:#fff}
-    .muted{opacity:.75;font-size:13px;margin-top:10px}
+    :root{
+      --bg:#F7F9F6;
+      --text:#0B2F28;
+      --primary:#0F6B52;
+      --accent:#D9B35A;
+      --card:#FFFFFF;
+      --shadow:rgba(0,0,0,0.08);
+    }
+
+    body{
+      margin:0;
+      font-family:Montserrat,system-ui;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+      height:100vh;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 20px;
+      background:var(--primary);
+      color:white;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .topbar h2{
+      margin:0;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:8px 14px;
+      border-radius:999px;
+      font-weight:600;
+      cursor:pointer;
+      border:2px solid white;
+      background:transparent;
+      color:white;
+      transition:all .2s ease;
+    }
+
+    .btn:hover{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#0b1220;
+    }
+
+    .viewer-wrapper{
+      flex:1;
+      display:flex;
+      background:black;
+    }
+
+    iframe{
+      flex:1;
+      border:none;
+    }
   </style>
 </head>
 <body>
-  <header class="top">
-    <a class="btn" href="materials.html">← Back</a>
-    <h1 id="t">Presentation</h1>
-    <button class="btn" id="lock">Lock</button>
-  </header>
 
-  <main class="wrap">
-    <iframe id="frame" title="PDF viewer"></iframe>
-    <div class="muted">Toolbar is hidden where supported (soft restriction).</div>
-  </main>
+  <div class="topbar">
+    <h2 id="title">Presentation</h2>
+    <div class="controls">
+      <button class="btn" onclick="goBack()">Back</button>
+      <button class="btn" onclick="toggleFullscreen()">Full Screen</button>
+    </div>
+  </div>
+
+  <div class="viewer-wrapper" id="viewerWrapper">
+    <iframe id="pdfFrame"></iframe>
+  </div>
 
   <script>
     const KEY="cyberEduUnlocked";
@@ -33,28 +98,36 @@
       location.href="index.html";
     }
 
-    document.getElementById("lock").addEventListener("click",()=>{
-      sessionStorage.removeItem(KEY);
-      location.href="index.html";
-    });
+    const params=new URLSearchParams(location.search);
+    const file=params.get("f");
 
-    const allowed=new Set([
-      "Tema1.pdf","Tema2.pdf","Tema3.pdf","Tema4.pdf","Tema5.pdf",
-      "Tema6.pdf","Tema7.pdf","Tema8.pdf","Tema9.pdf","Tema10.pdf"
-    ]);
-
-    const f=new URLSearchParams(location.search).get("f");
-    if(!allowed.has(f)){
+    if(!file){
+      alert("No file specified.");
       location.href="materials.html";
-    }else{
-      document.getElementById("t").textContent=f.replace(".pdf","");
-      // Load from CV repo assets via GitHub Pages URL:
-      const base="https://mujmej.github.io/CV/assets/";
-      document.getElementById("frame").src = base + encodeURIComponent(f) + "#toolbar=0&navpanes=0";
     }
 
-    // Soft: disable right click
-    document.addEventListener("contextmenu",(e)=>e.preventDefault());
+    document.getElementById("title").textContent=file.replace(".pdf","");
+
+    // Load PDF from CV repo assets
+    document.getElementById("pdfFrame").src =
+      "https://mujmej.github.io/CV/assets/" +
+      encodeURIComponent(file) +
+      "#toolbar=0&navpanes=0&scrollbar=0";
+
+    function goBack(){
+      location.href="materials.html";
+    }
+
+    function toggleFullscreen(){
+      const elem=document.getElementById("viewerWrapper");
+
+      if(!document.fullscreenElement){
+        elem.requestFullscreen();
+      }else{
+        document.exitFullscreen();
+      }
+    }
   </script>
+
 </body>
 </html>

@@ -5,27 +5,154 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cyber Education – Materials</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    body{margin:0;font-family:Montserrat,system-ui;background:#0f0f12;color:#fff;padding:24px}
-    .top{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    h1{margin:0;font-size:28px}
-    .btn{padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;cursor:pointer}
-    .grid{max-width:1100px;margin:18px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
-    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:18px}
-    .title{margin:0 0 6px;font-size:18px}
-    .desc{margin:0;opacity:.8;line-height:1.4}
-    .open{margin-top:12px;width:100%;padding:12px 14px;border-radius:16px;border:none;background:#8b1535;color:#fff;font-weight:700;cursor:pointer}
-    .note{max-width:1100px;margin:14px auto 0;opacity:.7;font-size:13px}
+    :root{
+      --bg:#F7F9F6;
+      --text:#0B2F28;
+      --primary:#0F6B52;
+      --accent:#D9B35A;
+      --card:#FFFFFF;
+      --shadow:rgba(0,0,0,0.08);
+      --border:rgba(0,0,0,0.10);
+    }
+    body{
+      margin:0;
+      font-family:Montserrat,system-ui;
+      background:var(--bg);
+      color:var(--text);
+      padding:24px;
+    }
+
+    .top{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    h1{margin:0;font-size:30px;letter-spacing:0.2px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:transparent;
+      color:var(--text);
+      cursor:pointer;
+      font-weight:600;
+    }
+    .pill:hover{border-color:rgba(0,0,0,0.18)}
+
+    .list{
+      max-width:1100px;
+      margin:18px auto 0;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .row{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px 16px;
+      box-shadow:0 10px 26px var(--shadow);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .left{
+      min-width:260px;
+      flex:1;
+    }
+    .kicker{
+      font-weight:700;
+      color:var(--primary);
+      margin:0 0 4px;
+      font-size:14px;
+      letter-spacing:0.2px;
+      text-transform:uppercase;
+    }
+    .title{
+      margin:0;
+      font-size:20px;
+    }
+    .desc{
+      margin:6px 0 0;
+      opacity:0.86;
+      line-height:1.45;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      border:2px solid var(--primary);
+      background:transparent;
+      color:var(--primary);
+      transition:transform .15s ease, background .15s ease, color .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:var(--primary);
+      color:#fff;
+      border-color:var(--primary);
+    }
+    .btn.primary:hover{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#0b1220;
+    }
+
+    .note{
+      max-width:1100px;
+      margin:14px auto 0;
+      opacity:.75;
+      font-size:13px;
+    }
+
+    /* Dark mode (optional) */
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0B1010;
+        --text:#E9EEE9;
+        --primary:#0F6B52;
+        --accent:#D9B35A;
+        --card:#0B2F28;
+        --shadow:rgba(0,0,0,0.6);
+        --border:rgba(255,255,255,0.16);
+      }
+      .pill{color:var(--text)}
+      .row{border-color:var(--border)}
+      .btn{border-color:var(--primary);color:var(--text)}
+    }
   </style>
 </head>
+
 <body>
   <header class="top">
     <h1>Presentations</h1>
-    <button class="btn" id="lock">Lock</button>
+    <button class="pill" id="lock">Lock</button>
   </header>
 
-  <main class="grid" id="grid"></main>
-  <p class="note">PDFs are loaded from your CV site assets: <span style="opacity:.9">mujmej.github.io/CV/assets/</span></p>
+  <main class="list" id="list"></main>
+  <p class="note">PDFs are loaded from: <b>mujmej.github.io/CV/assets/</b></p>
 
   <script>
     const KEY="cyberEduUnlocked";
@@ -38,25 +165,35 @@
       location.href="index.html";
     });
 
+    // Dio za kvizove, ubaci prave linkove u quizA / quizB
     const items=[
-      {file:"Tema1.pdf", title:"Tema 1", desc:"Internet kao javni prostor"},
-      {file:"Tema2.pdf", title:"Tema 2", desc:"Digitalni trag"},
-      {file:"Tema3.pdf", title:"Tema 3", desc:"Lični podaci i privatnost"},
-      {file:"Tema4.pdf", title:"Tema 4", desc:"Lozinke i zaštita naloga"},
-      {file:"Tema5.pdf", title:"Tema 5", desc:"Ko je s druge strane ekrana?"},
-      {file:"Tema6.pdf", title:"Tema 6", desc:"Društvene mreže i uticaj na mozak"},
-      {file:"Tema7.pdf", title:"Tema 7", desc:"Cyberbullying i pozitivna zajednica"},
-      {file:"Tema8.pdf", title:"Tema 8", desc:"Lažne vijesti i kritičko razmišljanje"},
-      {file:"Tema9.pdf", title:"Tema 9", desc:"AI i deepfake tehnologija"},
-      {file:"Tema10.pdf", title:"Tema 10", desc:"Incident response"},
+      {file:"Tema1.pdf",  topic:"Tema 1",  desc:"Internet kao javni prostor",                 quizA:"", quizB:""},
+      {file:"Tema2.pdf",  topic:"Tema 2",  desc:"Digitalni trag",                             quizA:"", quizB:""},
+      {file:"Tema3.pdf",  topic:"Tema 3",  desc:"Lični podaci i privatnost",                  quizA:"", quizB:""},
+      {file:"Tema4.pdf",  topic:"Tema 4",  desc:"Lozinke i zaštita naloga",                   quizA:"", quizB:""},
+      {file:"Tema5.pdf",  topic:"Tema 5",  desc:"Ko je s druge strane ekrana?",              quizA:"", quizB:""},
+      {file:"Tema6.pdf",  topic:"Tema 6",  desc:"Društvene mreže i uticaj na mozak",          quizA:"", quizB:""},
+      {file:"Tema7.pdf",  topic:"Tema 7",  desc:"Cyberbullying i pozitivna zajednica",       quizA:"", quizB:""},
+      {file:"Tema8.pdf",  topic:"Tema 8",  desc:"Lažne vijesti i kritičko razmišljanje",     quizA:"", quizB:""},
+      {file:"Tema9.pdf",  topic:"Tema 9",  desc:"AI i deepfake tehnologija",                 quizA:"", quizB:""},
+      {file:"Tema10.pdf", topic:"Tema 10", desc:"Incident response",                         quizA:"", quizB:""},
     ];
 
-    const grid=document.getElementById("grid");
-    grid.innerHTML=items.map(i=>`
-      <section class="card">
-        <h2 class="title">${i.title}</h2>
-        <p class="desc">${i.desc}</p>
-        <button class="open" onclick="location.href='viewer.html?f=${encodeURIComponent(i.file)}'">Open (view-only)</button>
+    const list=document.getElementById("list");
+
+    list.innerHTML = items.map(i => `
+      <section class="row">
+        <div class="left">
+          <div class="kicker">${i.topic}</div>
+          <h2 class="title">${i.desc}</h2>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" onclick="location.href='viewer.html?f=${encodeURIComponent(i.file)}'">Prezentacija</button>
+
+          <button class="btn" onclick="location.href='quiz.html?t=${encodeURIComponent(i.topic)}&q=A&u=${encodeURIComponent(i.quizA)}'">Kviz A</button>
+          <button class="btn" onclick="location.href='quiz.html?t=${encodeURIComponent(i.topic)}&q=B&u=${encodeURIComponent(i.quizB)}'">Kviz B</button>
+        </div>
       </section>
     `).join("");
   </script>

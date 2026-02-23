@@ -107,6 +107,8 @@
       color:var(--primary);
       transition:transform .15s ease, background .15s ease, color .15s ease;
       white-space:nowrap;
+      text-decoration:none;
+      display:inline-block;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn.primary{
@@ -127,7 +129,104 @@
       font-size:13px;
     }
 
-    /* Dark mode (optional) */
+    /* MODAL */
+    .modal{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.7);
+      z-index:1000;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .modal.show{display:flex}
+    
+    .modal-card{
+      background:var(--card);
+      border-radius:24px;
+      padding:40px;
+      max-width:500px;
+      width:100%;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);
+      position:relative;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      border:none;
+      background:var(--bg);
+      cursor:pointer;
+      font-size:20px;
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform 0.2s ease;
+    }
+    .modal-close:hover{transform:rotate(90deg)}
+
+    .modal-title{
+      font-size:1.8rem;
+      font-weight:900;
+      margin-bottom:10px;
+      color:var(--primary);
+    }
+
+    .modal-subtitle{
+      font-size:1rem;
+      color:var(--text);
+      opacity:0.7;
+      margin-bottom:30px;
+    }
+
+    .qr-box{
+      background:var(--bg);
+      border-radius:16px;
+      padding:24px;
+      margin-bottom:24px;
+    }
+
+    .qr-img{
+      width:220px;
+      height:220px;
+      margin:0 auto 16px;
+      display:block;
+      border-radius:12px;
+    }
+
+    .code-display{
+      font-size:2rem;
+      font-weight:900;
+      letter-spacing:4px;
+      color:var(--primary);
+      margin-bottom:12px;
+    }
+
+    .modal-note{
+      font-size:0.9rem;
+      color:var(--text);
+      opacity:0.8;
+      margin-bottom:24px;
+      line-height:1.6;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+    }
+
+    /* Dark mode */
     @media (prefers-color-scheme: dark){
       :root{
         --bg:#0B1010;
@@ -152,7 +251,31 @@
   </header>
 
   <main class="list" id="list"></main>
-  <p class="note">With love, MujMej</b></p>
+  <p class="note">With love, <b>MujMej</b></p>
+
+  <!-- QR MODAL -->
+  <div class="modal" id="qrModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeQR()">✕</button>
+      <h2 class="modal-title" id="modalTitle">Kviz QR Kod</h2>
+      <p class="modal-subtitle" id="modalSubtitle">Skeniraj QR kod ili unesi kod ručno</p>
+      
+      <div class="qr-box">
+        <img class="qr-img" id="qrImage" alt="QR Code" />
+        <div class="code-display" id="codeDisplay">----</div>
+      </div>
+
+      <p class="modal-note">
+        📱 Učenici skeniraju ovaj QR kod mobilnim telefonom<br>
+        💻 Na velikom ekranu vide kod koji unose u kviz
+      </p>
+
+      <div class="modal-actions">
+        <button class="btn" onclick="closeQR()">Zatvori</button>
+        <a class="btn primary" id="startQuizBtn" target="_blank">Pokreni kviz</a>
+      </div>
+    </div>
+  </div>
 
   <script>
     const KEY="cyberEduUnlocked";
@@ -165,37 +288,95 @@
       location.href="index.html";
     });
 
-    // Dio za kvizove, ubaci prave linkove u quizA / quizB
-    const items=[
-      {file:"Tema1.pdf",  topic:"Tema 1",  desc:"Internet kao javni prostor",                 quizA:"", quizB:""},
-      {file:"Tema2.pdf",  topic:"Tema 2",  desc:"Digitalni trag",                             quizA:"", quizB:""},
-      {file:"Tema3.pdf",  topic:"Tema 3",  desc:"Lični podaci i privatnost",                  quizA:"", quizB:""},
-      {file:"Tema4.pdf",  topic:"Tema 4",  desc:"Lozinke i zaštita naloga",                   quizA:"", quizB:""},
-      {file:"Tema5.pdf",  topic:"Tema 5",  desc:"Ko je s druge strane ekrana?",              quizA:"", quizB:""},
-      {file:"Tema6.pdf",  topic:"Tema 6",  desc:"Društvene mreže i uticaj na mozak",          quizA:"", quizB:""},
-      {file:"Tema7.pdf",  topic:"Tema 7",  desc:"Cyberbullying i pozitivna zajednica",       quizA:"", quizB:""},
-      {file:"Tema8.pdf",  topic:"Tema 8",  desc:"Lažne vijesti i kritičko razmišljanje",     quizA:"", quizB:""},
-      {file:"Tema9.pdf",  topic:"Tema 9",  desc:"AI i deepfake tehnologija",                 quizA:"", quizB:""},
-      {file:"Tema10.pdf", topic:"Tema 10", desc:"Incident response",                         quizA:"", quizB:""},
+    // TOPICS DATA (ID mora odgovarati data.js)
+    const topics = [
+      {id:"t1",  file:"Tema1.pdf",  topic:"Tema 1",  desc:"Internet kao javni prostor"},
+      {id:"t2",  file:"Tema2.pdf",  topic:"Tema 2",  desc:"Digitalni trag"},
+      {id:"t3",  file:"Tema3.pdf",  topic:"Tema 3",  desc:"Lični podaci i privatnost"},
+      {id:"t4",  file:"Tema4.pdf",  topic:"Tema 4",  desc:"Lozinke i zaštita naloga"},
+      {id:"t5",  file:"Tema5.pdf",  topic:"Tema 5",  desc:"Ko je s druge strane ekrana?"},
+      {id:"t6",  file:"Tema6.pdf",  topic:"Tema 6",  desc:"Društvene mreže i uticaj na mozak"},
+      {id:"t7",  file:"Tema7.pdf",  topic:"Tema 7",  desc:"Cyberbullying i pozitivna zajednica"},
+      {id:"t8",  file:"Tema8.pdf",  topic:"Tema 8",  desc:"Lažne vijesti i kritičko razmišljanje"},
+      {id:"t9",  file:"Tema9.pdf",  topic:"Tema 9",  desc:"AI i deepfake tehnologija"},
+      {id:"t10", file:"Tema10.pdf", topic:"Tema 10", desc:"Incident response"},
     ];
 
-    const list=document.getElementById("list");
+    const list = document.getElementById("list");
 
-    list.innerHTML = items.map(i => `
+    list.innerHTML = topics.map(t => `
       <section class="row">
         <div class="left">
-          <div class="kicker">${i.topic}</div>
-          <h2 class="title">${i.desc}</h2>
+          <div class="kicker">${t.topic}</div>
+          <h2 class="title">${t.desc}</h2>
         </div>
 
         <div class="actions">
-          <button class="btn primary" onclick="location.href='viewer.html?f=${encodeURIComponent(i.file)}'">Prezentacija</button>
-
-          <button class="btn" onclick="location.href='quiz.html?t=${encodeURIComponent(i.topic)}&q=A&u=${encodeURIComponent(i.quizA)}'">Kviz A</button>
-          <button class="btn" onclick="location.href='quiz.html?t=${encodeURIComponent(i.topic)}&q=B&u=${encodeURIComponent(i.quizB)}'">Kviz B</button>
+          <button class="btn primary" onclick="location.href='viewer.html?f=${encodeURIComponent(t.file)}'">📄 Prezentacija</button>
+          <button class="btn" onclick="showQR('${t.id}','A')">🔐 Kviz A</button>
+          <button class="btn" onclick="showQR('${t.id}','B')">🔐 Kviz B</button>
         </div>
       </section>
     `).join("");
+
+    // QR CODE GENERATION
+    function genCode(len=4){
+      const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+      let out = "";
+      for(let i=0;i<len;i++){
+        out += chars[Math.floor(Math.random()*chars.length)];
+      }
+      return out;
+    }
+
+    function buildQrUrl(code){
+      const base = location.origin + location.pathname.replace(/materials\.html$/, "quiz/verify.html");
+      return base + "?code=" + encodeURIComponent(code);
+    }
+
+    function setQrImage(imgEl, qrUrl){
+      const url = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(qrUrl);
+      imgEl.src = url;
+    }
+
+    // GENERATE PERSISTENT CODE (per topic + part)
+    function getPersistentCode(topicId, part){
+      const key = `qr_code_${topicId}_${part}`;
+      let code = localStorage.getItem(key);
+      if(!code){
+        code = genCode(4);
+        localStorage.setItem(key, code);
+      }
+      return code;
+    }
+
+    function showQR(topicId, part){
+      const topic = topics.find(t=>t.id===topicId);
+      if(!topic) return;
+
+      const code = getPersistentCode(topicId, part);
+      const qrUrl = buildQrUrl(code);
+
+      document.getElementById("modalTitle").textContent = `${topic.topic} – Kviz ${part}`;
+      document.getElementById("modalSubtitle").textContent = topic.desc;
+      document.getElementById("codeDisplay").textContent = code;
+      setQrImage(document.getElementById("qrImage"), qrUrl);
+
+      // Quiz link (educator direct access)
+      const quizUrl = `quiz/index.html#topic=${topicId}&part=${part}`;
+      document.getElementById("startQuizBtn").href = quizUrl;
+
+      document.getElementById("qrModal").classList.add("show");
+    }
+
+    function closeQR(){
+      document.getElementById("qrModal").classList.remove("show");
+    }
+
+    // Close modal on outside click
+    document.getElementById("qrModal").addEventListener("click", (e)=>{
+      if(e.target.id === "qrModal") closeQR();
+    });
   </script>
 </body>
 </html>

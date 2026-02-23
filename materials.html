@@ -1,382 +1,608 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyber Education – Materials</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
+  <title>Cyber Heroji – Materijali</title>
   <style>
-    :root{
-      --bg:#F7F9F6;
-      --text:#0B2F28;
-      --primary:#0F6B52;
-      --accent:#D9B35A;
-      --card:#FFFFFF;
-      --shadow:rgba(0,0,0,0.08);
-      --border:rgba(0,0,0,0.10);
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --gold: #f59e0b;
+      --gold-dark: #d97706;
+      --bg: #ffffff;
+      --card-bg: #f9fafb;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
     }
-    body{
-      margin:0;
-      font-family:Montserrat,system-ui;
-      background:var(--bg);
-      color:var(--text);
-      padding:24px;
+    [data-theme="dark"] {
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --text: #f9fafb;
+      --text-light: #9ca3af;
+      --border: #374151;
     }
-
-    .top{
-      max-width:1100px;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
-    h1{margin:0;font-size:30px;letter-spacing:0.2px}
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:transparent;
-      color:var(--text);
-      cursor:pointer;
-      font-weight:600;
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--gold));
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+      position: relative;
+      box-shadow: var(--shadow);
     }
-    .pill:hover{border-color:rgba(0,0,0,0.18)}
-
-    .list{
-      max-width:1100px;
-      margin:18px auto 0;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
-
-    .row{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:16px 16px;
-      box-shadow:0 10px 26px var(--shadow);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
     }
-
-    .left{
-      min-width:260px;
-      flex:1;
+    #themeToggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+      backdrop-filter: blur(10px);
     }
-    .kicker{
-      font-weight:700;
-      color:var(--primary);
-      margin:0 0 4px;
-      font-size:14px;
-      letter-spacing:0.2px;
-      text-transform:uppercase;
+    #themeToggle:hover {
+      transform: rotate(15deg) scale(1.1);
+      background: rgba(255,255,255,0.3);
     }
-    .title{
-      margin:0;
-      font-size:20px;
+    nav {
+      background: var(--card-bg);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.3s;
     }
-    .desc{
-      margin:6px 0 0;
-      opacity:0.86;
-      line-height:1.45;
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      transition: background 0.3s, transform 0.2s;
     }
-    .btn{
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:700;
-      cursor:pointer;
-      border:2px solid var(--primary);
-      background:transparent;
-      color:var(--primary);
-      transition:transform .15s ease, background .15s ease, color .15s ease;
-      white-space:nowrap;
-      text-decoration:none;
-      display:inline-block;
+    nav a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{
-      background:var(--primary);
-      color:#fff;
-      border-color:var(--primary);
+    .container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
     }
-    .btn.primary:hover{
-      background:var(--accent);
-      border-color:var(--accent);
-      color:#0b1220;
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 1rem;
     }
-
-    .note{
-      max-width:1100px;
-      margin:14px auto 0;
-      opacity:.75;
-      font-size:13px;
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      border-radius: 2px;
     }
-
-    /* MODAL */
-    .modal{
-      display:none;
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.7);
-      z-index:1000;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
     }
-    .modal.show{display:flex}
-    
-    .modal-card{
-      background:var(--card);
-      border-radius:24px;
-      padding:40px;
-      max-width:500px;
-      width:100%;
-      text-align:center;
-      box-shadow:0 20px 60px rgba(0,0,0,0.3);
-      position:relative;
+    .topic-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     }
-
-    .modal-close{
-      position:absolute;
-      top:16px;
-      right:16px;
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      border:none;
-      background:var(--bg);
-      cursor:pointer;
-      font-size:20px;
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:transform 0.2s ease;
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      border-color: var(--primary);
     }
-    .modal-close:hover{transform:rotate(90deg)}
-
-    .modal-title{
-      font-size:1.8rem;
-      font-weight:900;
-      margin-bottom:10px;
-      color:var(--primary);
+    .topic-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 1rem;
     }
-
-    .modal-subtitle{
-      font-size:1rem;
-      color:var(--text);
-      opacity:0.7;
-      margin-bottom:30px;
+    .topic-icon {
+      font-size: 3rem;
+      line-height: 1;
     }
-
-    .qr-box{
-      background:var(--bg);
-      border-radius:16px;
-      padding:24px;
-      margin-bottom:24px;
+    .topic-info h3 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
     }
-
-    .qr-img{
-      width:220px;
-      height:220px;
-      margin:0 auto 16px;
-      display:block;
-      border-radius:12px;
+    .topic-info .topic-key {
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-weight: 600;
     }
-
-    .code-display{
-      font-size:2rem;
-      font-weight:900;
-      letter-spacing:4px;
-      color:var(--primary);
-      margin-bottom:12px;
+    .topic-desc {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
     }
-
-    .modal-note{
-      font-size:0.9rem;
-      color:var(--text);
-      opacity:0.8;
-      margin-bottom:24px;
-      line-height:1.6;
+    .topic-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
-
-    .modal-actions{
-      display:flex;
-      gap:12px;
-      justify-content:center;
+    .btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.3s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
     }
-
-    /* Dark mode */
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0B1010;
-        --text:#E9EEE9;
-        --primary:#0F6B52;
-        --accent:#D9B35A;
-        --card:#0B2F28;
-        --shadow:rgba(0,0,0,0.6);
-        --border:rgba(255,255,255,0.16);
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+    .btn-secondary {
+      background: var(--gold);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: var(--gold-dark);
+      transform: scale(1.05);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: var(--card-bg);
+      margin: 5% auto;
+      padding: 2.5rem;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: slideDown 0.3s;
+      position: relative;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
       }
-      .pill{color:var(--text)}
-      .row{border-color:var(--border)}
-      .btn{border-color:var(--primary);color:var(--text)}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color 0.3s, transform 0.2s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .modal-close:hover {
+      color: var(--primary);
+      background: var(--border);
+      transform: rotate(90deg);
+    }
+    .modal-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .modal-header h2 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.75rem;
+    }
+    .modal-header p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+    .qr-display {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .qr-display img {
+      max-width: 220px;
+      border: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 0.5rem;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .code-display {
+      background: linear-gradient(135deg, var(--primary), var(--gold));
+      color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .code-display .label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+    .code-display .code {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 0.5rem;
+      font-family: "Courier New", monospace;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .modal-footer {
+      text-align: center;
+    }
+    .instructions {
+      background: var(--card-bg);
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .instructions h3 {
+      color: var(--gold);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+    .instructions ol {
+      margin-left: 1.5rem;
+      color: var(--text-light);
+    }
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      background: var(--card-bg);
+      color: var(--text);
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      border-top: 2px solid var(--border);
+    }
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .topic-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      #themeToggle {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <header class="top">
-    <h1>Presentations</h1>
-    <button class="pill" id="lock">Lock</button>
+  <header>
+    <h1>🛡️ Cyber Heroji</h1>
+    <p>Edukativni program za digitalnu bezbednost</p>
+    <button id="themeToggle" title="Promeni temu">🌙</button>
   </header>
 
-  <main class="list" id="list"></main>
-  <p class="note">With love, <b>MujMej</b></p>
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 Početna</a></li>
+      <li><a href="materials.html">📚 Materijali</a></li>
+      <li><a href="https://mujmej.github.io/cyber-heroji/quiz/">🎮 Quiz</a></li>
+      <li><a href="admin.html">👨‍💼 Admin</a></li>
+    </ul>
+  </nav>
 
-  <!-- QR MODAL -->
-  <div class="modal" id="qrModal">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeQR()">✕</button>
-      <h2 class="modal-title" id="modalTitle">Kviz QR Kod</h2>
-      <p class="modal-subtitle" id="modalSubtitle">Skeniraj QR kod ili unesi kod ručno</p>
-      
-      <div class="qr-box">
-        <img class="qr-img" id="qrImage" alt="QR Code" />
-        <div class="code-display" id="codeDisplay">----</div>
+  <div class="container">
+    <div class="instructions">
+      <h3>📖 Uputstvo za upotrebu</h3>
+      <ol>
+        <li><strong>Preuzmi PDF</strong> – preuzmite prezentaciju za željenu temu</li>
+        <li><strong>Pokreni kviz</strong> – eduktor pritiskom na dugme <strong>"Kviz A"</strong> ili <strong>"Kviz B"</strong> otvara QR kod i ulazni kod</li>
+        <li><strong>Skeniraj QR</strong> – učenici skeniraju QR kod koji ih vodi na stranicu sa kodom</li>
+        <li><strong>Unesi kod</strong> – učenici unose prikazani kod u kviz da bi započeli test</li>
+        <li><strong>Sakupi ključeve</strong> – za prolaz kroz temu učenici dobijaju ključnu reč; 10 ključeva = sertifikat!</li>
+      </ol>
+    </div>
+
+    <h2 class="section-title">📚 Teme i Materijali</h2>
+    <div id="topicsContainer" class="topics-grid"></div>
+  </div>
+
+  <!-- QR Modal -->
+  <div id="qrModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-header">
+        <h2 id="modalTitle">QR Kod za Kviz</h2>
+        <p id="modalSubtitle">Skeniranje za učenike</p>
       </div>
-
-      <p class="modal-note">
-        📱 Učenici skeniraju ovaj QR kod mobilnim telefonom<br>
-        💻 Na velikom ekranu vide kod koji unose u kviz
-      </p>
-
-      <div class="modal-actions">
-        <button class="btn" onclick="closeQR()">Zatvori</button>
-        <a class="btn primary" id="startQuizBtn" target="_blank">Pokreni kviz</a>
+      <div class="qr-display">
+        <img id="qrImage" alt="QR kod za kviz" />
+      </div>
+      <div class="code-display">
+        <div class="label">Ulazni kod za učenike</div>
+        <div class="code" id="qrCode">----</div>
+      </div>
+      <div class="modal-footer">
+        <button id="startQuizBtn" class="btn btn-primary" style="width:100%;">🎮 Pokreni kviz za edukatora</button>
       </div>
     </div>
   </div>
 
+  <footer>
+    <p>&copy; 2026 Cyber Heroji | Digitalna bezbednost za decu</p>
+    <p>Projekat razvijen za osnovno obrazovanje</p>
+  </footer>
+
   <script>
-    const KEY="cyberEduUnlocked";
-    if(sessionStorage.getItem(KEY)!=="true"){
-      location.href="index.html";
-    }
-
-    document.getElementById("lock").addEventListener("click",()=>{
-      sessionStorage.removeItem(KEY);
-      location.href="index.html";
-    });
-
-    // TOPICS DATA (ID mora odgovarati data.js)
+    // Topics data matching data.js
     const topics = [
-      {id:"t1",  file:"Tema1.pdf",  topic:"Tema 1",  desc:"Internet kao javni prostor"},
-      {id:"t2",  file:"Tema2.pdf",  topic:"Tema 2",  desc:"Digitalni trag"},
-      {id:"t3",  file:"Tema3.pdf",  topic:"Tema 3",  desc:"Lični podaci i privatnost"},
-      {id:"t4",  file:"Tema4.pdf",  topic:"Tema 4",  desc:"Lozinke i zaštita naloga"},
-      {id:"t5",  file:"Tema5.pdf",  topic:"Tema 5",  desc:"Ko je s druge strane ekrana?"},
-      {id:"t6",  file:"Tema6.pdf",  topic:"Tema 6",  desc:"Društvene mreže i uticaj na mozak"},
-      {id:"t7",  file:"Tema7.pdf",  topic:"Tema 7",  desc:"Cyberbullying i pozitivna zajednica"},
-      {id:"t8",  file:"Tema8.pdf",  topic:"Tema 8",  desc:"Lažne vijesti i kritičko razmišljanje"},
-      {id:"t9",  file:"Tema9.pdf",  topic:"Tema 9",  desc:"AI i deepfake tehnologija"},
-      {id:"t10", file:"Tema10.pdf", topic:"Tema 10", desc:"Incident response"},
+      {
+        id: "t1",
+        title: "Internet kao javni park",
+        icon: "🌳",
+        key: "PARK",
+        description: "Otkrivamo zašto je internet kao veliki javni park i kako se bezbedno kretati kroz njega.",
+        pdf: "tema1_internet_javni_park.pdf"
+      },
+      {
+        id: "t2",
+        title: "Digitalni otisak",
+        icon: "👣",
+        key: "OTISAK",
+        description: "Učimo šta je digitalni trag koji ostavljamo online i kako ga zaštititi.",
+        pdf: "tema2_digitalni_otisak.pdf"
+      },
+      {
+        id: "t3",
+        title: "Lični podaci i privatnost",
+        icon: "🔐",
+        key: "SEF",
+        description: "Razumemo šta su lični podaci i zašto su važni za našu privatnost.",
+        pdf: "tema3_licni_podaci.pdf"
+      },
+      {
+        id: "t4",
+        title: "Lozinke i zaštita naloga",
+        icon: "🛡️",
+        key: "TREZOR",
+        description: "Kreiramo jake lozinke i učimo kako zaštititi svoje korisničke naloge.",
+        pdf: "tema4_lozinke.pdf"
+      },
+      {
+        id: "t5",
+        title: "Ko se krije iza ekrana?",
+        icon: "🎭",
+        key: "MASKA",
+        description: "Otkrivamo kako prepoznati lažne profile i zaštititi se od online prevara.",
+        pdf: "tema5_profili.pdf"
+      },
+      {
+        id: "t6",
+        title: "Društvene mreže i mozak",
+        icon: "🧠",
+        key: "MOZAK",
+        description: "Učimo kako društvene mreže utiču na naš mozak i emocije.",
+        pdf: "tema6_drustvene_mreze.pdf"
+      },
+      {
+        id: "t7",
+        title: "Cyberbullying i pozitivna zajednica",
+        icon: "💬",
+        key: "STIT",
+        description: "Borimo se protiv zlostavljanja na internetu i gradimo pozitivnu zajednicu.",
+        pdf: "tema7_cyberbullying.pdf"
+      },
+      {
+        id: "t8",
+        title: "Lažne vesti i kritičko razmišljanje",
+        icon: "🔍",
+        key: "DETEKTIV",
+        description: "Postajemo digitalni detektivi i učimo prepoznavati lažne informacije.",
+        pdf: "tema8_lazne_vesti.pdf"
+      },
+      {
+        id: "t9",
+        title: "AI i deepfake",
+        icon: "🤖",
+        key: "ILUZIJA",
+        description: "Otkrivamo šta je veštačka inteligencija i kako prepoznati deepfake sadržaj.",
+        pdf: "tema9_ai_deepfake.pdf"
+      },
+      {
+        id: "t10",
+        title: "Reakcija na incident",
+        icon: "🚨",
+        key: "HEROJ",
+        description: "Učimo šta uraditi kada se suočimo sa opasnom situacijom na internetu.",
+        pdf: "tema10_incident.pdf"
+      }
     ];
 
-    const list = document.getElementById("list");
-
-    list.innerHTML = topics.map(t => `
-      <section class="row">
-        <div class="left">
-          <div class="kicker">${t.topic}</div>
-          <h2 class="title">${t.desc}</h2>
-        </div>
-
-        <div class="actions">
-          <button class="btn primary" onclick="location.href='viewer.html?f=${encodeURIComponent(t.file)}'">📄 Prezentacija</button>
-          <button class="btn" onclick="showQR('${t.id}','A')">🔐 Kviz A</button>
-          <button class="btn" onclick="showQR('${t.id}','B')">🔐 Kviz B</button>
-        </div>
-      </section>
-    `).join("");
-
-    // QR CODE GENERATION
-    function genCode(len=4){
-      const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-      let out = "";
-      for(let i=0;i<len;i++){
-        out += chars[Math.floor(Math.random()*chars.length)];
+    // Generate 4-character code
+    function genCode(len) {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let code = "";
+      for (let i = 0; i < len; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
       }
-      return out;
+      return code;
     }
 
-    function buildQrUrl(code){
-      const base = location.origin + location.pathname.replace(/materials\.html$/, "quiz/verify.html");
-      return base + "?code=" + encodeURIComponent(code);
-    }
-
-    function setQrImage(imgEl, qrUrl){
-      const url = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(qrUrl);
-      imgEl.src = url;
-    }
-
-    // GENERATE PERSISTENT CODE (per topic + part)
-    function getPersistentCode(topicId, part){
+    // Get or create persistent QR code for topic/part
+    function getPersistentCode(topicId, part) {
       const key = `qr_code_${topicId}_${part}`;
       let code = localStorage.getItem(key);
-      if(!code){
+      if (!code) {
         code = genCode(4);
         localStorage.setItem(key, code);
       }
       return code;
     }
 
-    function showQR(topicId, part){
-      const topic = topics.find(t=>t.id===topicId);
-      if(!topic) return;
+    // Build QR URL pointing to verify.html
+    function buildQrUrl(code) {
+      const verifyBase = "https://mujmej.github.io/cyber-heroji/quiz/verify.html";
+      return verifyBase + "?code=" + encodeURIComponent(code);
+    }
+
+    // Show QR modal
+    function showQR(topicId, part) {
+      const topic = topics.find(t => t.id === topicId);
+      if (!topic) return;
 
       const code = getPersistentCode(topicId, part);
-      const qrUrl = buildQrUrl(code);
+      const qrDataUrl = buildQrUrl(code);
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrDataUrl)}`;
+      
+      document.getElementById("modalTitle").textContent = `${topic.icon} ${topic.title}`;
+      document.getElementById("modalSubtitle").textContent = `Kviz ${part === "A" ? "A (9-11 god)" : "B (12-15 god)"}`;
+      document.getElementById("qrImage").src = qrApiUrl;
+      document.getElementById("qrCode").textContent = code;
 
-      document.getElementById("modalTitle").textContent = `${topic.topic} – Kviz ${part}`;
-      document.getElementById("modalSubtitle").textContent = topic.desc;
-      document.getElementById("codeDisplay").textContent = code;
-      setQrImage(document.getElementById("qrImage"), qrUrl);
+      const quizUrl = `https://mujmej.github.io/cyber-heroji/quiz/#topic=${topicId}&part=${part}`;
+      document.getElementById("startQuizBtn").onclick = () => {
+        window.open(quizUrl, "_blank");
+      };
 
-      // Quiz link (educator direct access)
-      const quizUrl = `quiz/index.html#topic=${topicId}&part=${part}`;
-      document.getElementById("startQuizBtn").href = quizUrl;
-
-      document.getElementById("qrModal").classList.add("show");
+      document.getElementById("qrModal").style.display = "block";
     }
 
-    function closeQR(){
-      document.getElementById("qrModal").classList.remove("show");
-    }
-
-    // Close modal on outside click
-    document.getElementById("qrModal").addEventListener("click", (e)=>{
-      if(e.target.id === "qrModal") closeQR();
+    // Close modal
+    document.querySelector(".modal-close").addEventListener("click", () => {
+      document.getElementById("qrModal").style.display = "none";
     });
+
+    window.addEventListener("click", (e) => {
+      const modal = document.getElementById("qrModal");
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    // Render topics
+    function renderTopics() {
+      const container = document.getElementById("topicsContainer");
+      container.innerHTML = topics.map(topic => `
+        <div class="topic-card">
+          <div class="topic-header">
+            <div class="topic-icon">${topic.icon}</div>
+            <div class="topic-info">
+              <h3>${topic.title}</h3>
+              <span class="topic-key">🔑 Ključ: ${topic.key}</span>
+            </div>
+          </div>
+          <p class="topic-desc">${topic.description}</p>
+          <div class="topic-actions">
+            <a href="materials/${topic.pdf}" target="_blank" class="btn btn-primary">📄 Preuzmi PDF</a>
+            <button onclick="showQR('${topic.id}', 'A')" class="btn btn-secondary">🎯 Kviz A</button>
+            <button onclick="showQR('${topic.id}', 'B')" class="btn btn-outline">🎯 Kviz B</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const currentTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+
+    themeToggle.addEventListener("click", () => {
+      const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+    });
+
+    // Initialize
+    window.showQR = showQR;
+    renderTopics();
   </script>
 </body>
 </html>

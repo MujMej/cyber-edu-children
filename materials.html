@@ -545,7 +545,8 @@
       document.getElementById("qrImage").src = qrApiUrl;
       document.getElementById("qrCode").textContent = code;
 
-      const quizUrl = `https://mujmej.github.io/quizzes/quiz.html?topic=${topicId}&part=${part}&student=Edukator`;
+     const quizUrl = `https://mujmej.github.io/quizzes/quiz.html?
+     topic=${topicId}&part=${part}&student=Edukator`;
       document.getElementById("startQuizBtn").onclick = () => {
         window.open(quizUrl, "_blank");
       };

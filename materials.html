@@ -191,7 +191,7 @@
     <div class="instructions">
       <h3>📖 Uputstvo za upotrebu</h3>
       <ol>
-        <li><strong>Preuzmi PDF</strong> – preuzmite prezentaciju za željenu temu</li>
+        <li><strong>Prezentacija</strong> – Pogledaj prezentaciju za željenu temu</li>
         <li><strong>Pokreni kviz</strong> – eduktor pritiskom na dugme <strong>"Kviz A"</strong> ili <strong>"Kviz B"</strong> otvara QR kod i ulazni kod</li>
         <li><strong>Skeniraj QR</strong> – učenici skeniraju QR kod koji ih vodi na stranicu sa kodom</li>
         <li><strong>Unesi kod</strong> – učenici unose prikazani kod u kviz da bi započeli test</li>
@@ -239,7 +239,7 @@
       { id:"t6",  title:"Društvene mreže i mozak",           icon:"🧠", key:"BALANS",   description:"Učimo kako društvene mreže utiču na naš mozak i emocije.", pdf:"Tema6.pdf" },
       { id:"t7",  title:"Cyberbullying i pozitivna zajednica",icon:"💬", key:"HRABROST", description:"Borimo se protiv zlostavljanja na internetu i gradimo pozitivnu zajednicu.", pdf:"Tema7.pdf" },
       { id:"t8",  title:"Lažne vesti i kritičko razmišljanje",icon:"🔍", key:"DETEKTIV", description:"Postajemo digitalni detektivi i učimo prepoznavati lažne informacije.", pdf:"Tema8.pdf" },
-      { id:"t9",  title:"AI i deepfake",                     icon:"🤖", key:"ILUZIJA",  description:"Otkrivamo šta je veštačka inteligencija i kako prepoznati deepfake sadržaj.", pdf:"Tema9.pdf" },
+      { id:"t9",  title:"AI i deepfake",                     icon:"🤖", key:"PAZI",  description:"Otkrivamo šta je veštačka inteligencija i kako prepoznati deepfake sadržaj.", pdf:"Tema9.pdf" },
       { id:"t10", title:"Reakcija na incident",              icon:"🚨", key:"HEROJ",    description:"Učimo šta uraditi kada se suočimo sa opasnom situacijom na internetu.", pdf:"Tema10.pdf" }
     ];
 
@@ -302,7 +302,7 @@
           </div>
           <p class="topic-desc">${t.description}</p>
           <div class="topic-actions">
-            <a href="materials/${t.pdf}" target="_blank" class="btn btn-primary">📄 Preuzmi PDF</a>
+            <a href="${t.pdf}" target="_blank" class="btn btn-primary">📄 Preuzmi PDF</a>
             <button onclick="showQR('${t.id}','A')" class="btn btn-secondary">🎯 Kviz A</button>
             <button onclick="showQR('${t.id}','B')" class="btn btn-outline">🎯 Kviz B</button>
           </div>

@@ -40,324 +40,134 @@
       position: relative;
       box-shadow: var(--shadow);
     }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    }
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-    }
+    header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    header p  { font-size: 1.1rem; opacity: 0.95; }
     #themeToggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255,255,255,0.2);
-      border: 2px solid #fff;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.2); border: 2px solid #fff;
+      border-radius: 50%; width: 50px; height: 50px;
+      cursor: pointer; font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
       transition: transform 0.3s, background 0.3s;
       backdrop-filter: blur(10px);
     }
-    #themeToggle:hover {
-      transform: rotate(15deg) scale(1.1);
-      background: rgba(255,255,255,0.3);
-    }
+    #themeToggle:hover { transform: rotate(15deg) scale(1.1); background: rgba(255,255,255,0.3); }
     nav {
-      background: var(--card-bg);
-      padding: 1rem;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background 0.3s;
+      background: var(--card-bg); padding: 1rem;
+      box-shadow: var(--shadow); position: sticky;
+      top: 0; z-index: 100; transition: background 0.3s;
     }
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+    nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
     nav a {
-      color: var(--text);
-      text-decoration: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 600;
+      text-decoration: none; padding: 0.75rem 1.5rem;
+      border-radius: 8px; background: var(--primary);
+      color: #fff; font-weight: 600;
       transition: background 0.3s, transform 0.2s;
     }
-    nav a:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-    .container {
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 1.5rem;
-    }
+    nav a:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .container { max-width: 1200px; margin: 3rem auto; padding: 0 1.5rem; }
     .section-title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      color: var(--primary);
-      position: relative;
-      padding-bottom: 1rem;
+      font-size: 2rem; margin-bottom: 2rem; text-align: center;
+      color: var(--primary); position: relative; padding-bottom: 1rem;
     }
     .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--gold));
-      border-radius: 2px;
+      content: ""; position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%); width: 100px; height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--gold)); border-radius: 2px;
     }
     .topics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; margin-bottom: 4rem;
     }
     .topic-card {
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: var(--shadow);
+      background: var(--card-bg); border: 2px solid var(--border);
+      border-radius: 12px; padding: 2rem; box-shadow: var(--shadow);
       transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     }
-    .topic-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      border-color: var(--primary);
-    }
-    .topic-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-      gap: 1rem;
-    }
-    .topic-icon {
-      font-size: 3rem;
-      line-height: 1;
-    }
-    .topic-info h3 {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-    }
-    .topic-info .topic-key {
-      font-size: 0.9rem;
-      color: var(--gold);
-      font-weight: 600;
-    }
-    .topic-desc {
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-    .topic-actions {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
+    .topic-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-color: var(--primary); }
+    .topic-header { display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem; }
+    .topic-icon { font-size: 3rem; line-height: 1; }
+    .topic-info h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.25rem; }
+    .topic-info .topic-key { font-size: 0.9rem; color: var(--gold); font-weight: 600; }
+    .topic-desc { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.8; }
+    .topic-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
     .btn {
-      padding: 0.75rem 1.25rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
+      padding: 0.75rem 1.25rem; border: none; border-radius: 8px;
+      cursor: pointer; font-weight: 600; font-size: 0.95rem;
       transition: background 0.3s, transform 0.2s;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
+      text-decoration: none; display: inline-block; text-align: center;
     }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: scale(1.05);
-    }
-    .btn-secondary {
-      background: var(--gold);
-      color: #fff;
-    }
-    .btn-secondary:hover {
-      background: var(--gold-dark);
-      transform: scale(1.05);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-    .btn-outline:hover {
-      background: var(--primary);
-      color: #fff;
-    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: scale(1.05); }
+    .btn-secondary { background: var(--gold); color: #fff; }
+    .btn-secondary:hover { background: var(--gold-dark); transform: scale(1.05); }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: #fff; }
     .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(5px);
+      display: none; position: fixed; z-index: 1000;
+      left: 0; top: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
       animation: fadeIn 0.3s;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .modal-content {
-      background: var(--card-bg);
-      margin: 5% auto;
-      padding: 2.5rem;
-      border: 2px solid var(--border);
-      border-radius: 16px;
-      width: 90%;
-      max-width: 500px;
+      background: var(--card-bg); margin: 5% auto; padding: 2.5rem;
+      border: 2px solid var(--border); border-radius: 16px;
+      width: 90%; max-width: 500px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      animation: slideDown 0.3s;
-      position: relative;
+      animation: slideDown 0.3s; position: relative;
     }
     @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-50px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--text-light);
-      cursor: pointer;
-      transition: color 0.3s, transform 0.2s;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 2rem; font-weight: bold; color: var(--text-light);
+      cursor: pointer; transition: color 0.3s, transform 0.2s;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center; border-radius: 50%;
     }
-    .modal-close:hover {
-      color: var(--primary);
-      background: var(--border);
-      transform: rotate(90deg);
-    }
-    .modal-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .modal-header h2 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-size: 1.75rem;
-    }
-    .modal-header p {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-    .qr-display {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+    .modal-close:hover { color: var(--primary); background: var(--border); transform: rotate(90deg); }
+    .modal-header { text-align: center; margin-bottom: 2rem; }
+    .modal-header h2 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.75rem; }
+    .modal-header p  { color: var(--text-light); font-size: 0.95rem; }
+    .qr-display { text-align: center; margin-bottom: 2rem; }
     .qr-display img {
-      max-width: 220px;
-      border: 4px solid var(--primary);
-      border-radius: 12px;
-      padding: 0.5rem;
-      background: #fff;
-      box-shadow: var(--shadow);
+      max-width: 220px; border: 4px solid var(--primary);
+      border-radius: 12px; padding: 0.5rem;
+      background: #fff; box-shadow: var(--shadow);
     }
     .code-display {
       background: linear-gradient(135deg, var(--primary), var(--gold));
-      color: #fff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      text-align: center;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow);
+      color: #fff; padding: 1.5rem; border-radius: 12px;
+      text-align: center; margin-bottom: 2rem; box-shadow: var(--shadow);
     }
-    .code-display .label {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-bottom: 0.5rem;
-    }
+    .code-display .label { font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem; }
     .code-display .code {
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: 0.5rem;
-      font-family: "Courier New", monospace;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      font-size: 2.5rem; font-weight: bold; letter-spacing: 0.5rem;
+      font-family: "Courier New", monospace; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
-    .modal-footer {
-      text-align: center;
-    }
+    .modal-footer { text-align: center; }
     .instructions {
-      background: var(--card-bg);
-      border-left: 4px solid var(--gold);
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin-bottom: 2rem;
+      background: var(--card-bg); border-left: 4px solid var(--gold);
+      padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;
     }
-    .instructions h3 {
-      color: var(--gold);
-      margin-bottom: 1rem;
-      font-size: 1.25rem;
-    }
-    .instructions ol {
-      margin-left: 1.5rem;
-      color: var(--text-light);
-    }
-    .instructions li {
-      margin-bottom: 0.5rem;
-    }
+    .instructions h3 { color: var(--gold); margin-bottom: 1rem; font-size: 1.25rem; }
+    .instructions ol { margin-left: 1.5rem; color: var(--text-light); }
+    .instructions li { margin-bottom: 0.5rem; }
     footer {
-      background: var(--card-bg);
-      color: var(--text);
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 4rem;
-      border-top: 2px solid var(--border);
+      background: var(--card-bg); color: var(--text);
+      text-align: center; padding: 2rem 1rem;
+      margin-top: 4rem; border-top: 2px solid var(--border);
     }
-    footer p {
-      margin-bottom: 0.5rem;
-    }
+    footer p { margin-bottom: 0.5rem; }
     @media (max-width: 768px) {
       header h1 { font-size: 2rem; }
       .topics-grid { grid-template-columns: 1fr; }
       .topic-actions { flex-direction: column; }
       .btn { width: 100%; }
-      #themeToggle {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-      }
+      #themeToggle { width: 45px; height: 45px; font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -372,7 +182,7 @@
     <ul>
       <li><a href="index.html">🏠 Početna</a></li>
       <li><a href="materials.html">📚 Materijali</a></li>
-      <li><a href="https://mujmej.github.io/cyber-heroji/quiz/">🎮 Quiz</a></li>
+      <li><a href="https://mujmej.github.io/quizzes/">🎮 Quiz</a></li>
       <li><a href="admin.html">👨‍💼 Admin</a></li>
     </ul>
   </nav>
@@ -420,180 +230,89 @@
   </footer>
 
   <script>
-    // Topics data matching data.js
     const topics = [
-      {
-        id: "t1",
-        title: "Internet kao javni park",
-        icon: "🌳",
-        key: "PARK",
-        description: "Otkrivamo zašto je internet kao veliki javni park i kako se bezbedno kretati kroz njega.",
-        pdf: "tema1_internet_javni_park.pdf"
-      },
-      {
-        id: "t2",
-        title: "Digitalni otisak",
-        icon: "👣",
-        key: "OTISAK",
-        description: "Učimo šta je digitalni trag koji ostavljamo online i kako ga zaštititi.",
-        pdf: "tema2_digitalni_otisak.pdf"
-      },
-      {
-        id: "t3",
-        title: "Lični podaci i privatnost",
-        icon: "🔐",
-        key: "SEF",
-        description: "Razumemo šta su lični podaci i zašto su važni za našu privatnost.",
-        pdf: "tema3_licni_podaci.pdf"
-      },
-      {
-        id: "t4",
-        title: "Lozinke i zaštita naloga",
-        icon: "🛡️",
-        key: "TREZOR",
-        description: "Kreiramo jake lozinke i učimo kako zaštititi svoje korisničke naloge.",
-        pdf: "tema4_lozinke.pdf"
-      },
-      {
-        id: "t5",
-        title: "Ko se krije iza ekrana?",
-        icon: "🎭",
-        key: "MASKA",
-        description: "Otkrivamo kako prepoznati lažne profile i zaštititi se od online prevara.",
-        pdf: "tema5_profili.pdf"
-      },
-      {
-        id: "t6",
-        title: "Društvene mreže i mozak",
-        icon: "🧠",
-        key: "MOZAK",
-        description: "Učimo kako društvene mreže utiču na naš mozak i emocije.",
-        pdf: "tema6_drustvene_mreze.pdf"
-      },
-      {
-        id: "t7",
-        title: "Cyberbullying i pozitivna zajednica",
-        icon: "💬",
-        key: "STIT",
-        description: "Borimo se protiv zlostavljanja na internetu i gradimo pozitivnu zajednicu.",
-        pdf: "tema7_cyberbullying.pdf"
-      },
-      {
-        id: "t8",
-        title: "Lažne vesti i kritičko razmišljanje",
-        icon: "🔍",
-        key: "DETEKTIV",
-        description: "Postajemo digitalni detektivi i učimo prepoznavati lažne informacije.",
-        pdf: "tema8_lazne_vesti.pdf"
-      },
-      {
-        id: "t9",
-        title: "AI i deepfake",
-        icon: "🤖",
-        key: "ILUZIJA",
-        description: "Otkrivamo šta je veštačka inteligencija i kako prepoznati deepfake sadržaj.",
-        pdf: "tema9_ai_deepfake.pdf"
-      },
-      {
-        id: "t10",
-        title: "Reakcija na incident",
-        icon: "🚨",
-        key: "HEROJ",
-        description: "Učimo šta uraditi kada se suočimo sa opasnom situacijom na internetu.",
-        pdf: "tema10_incident.pdf"
-      }
+      { id:"t1",  title:"Internet kao javni park",           icon:"🌳", key:"PARK",     description:"Otkrivamo zašto je internet kao veliki javni park i kako se bezbedno kretati kroz njega.", pdf:"tema1_internet_javni_park.pdf" },
+      { id:"t2",  title:"Digitalni otisak",                  icon:"👣", key:"OTISAK",   description:"Učimo šta je digitalni trag koji ostavljamo online i kako ga zaštititi.", pdf:"tema2_digitalni_otisak.pdf" },
+      { id:"t3",  title:"Lični podaci i privatnost",         icon:"🔐", key:"SEF",      description:"Razumemo šta su lični podaci i zašto su važni za našu privatnost.", pdf:"tema3_licni_podaci.pdf" },
+      { id:"t4",  title:"Lozinke i zaštita naloga",          icon:"🛡️", key:"ŠTIT",    description:"Kreiramo jake lozinke i učimo kako zaštititi svoje korisničke naloge.", pdf:"tema4_lozinke.pdf" },
+      { id:"t5",  title:"Ko se krije iza ekrana?",           icon:"🎭", key:"MASKA",    description:"Otkrivamo kako prepoznati lažne profile i zaštititi se od online prevara.", pdf:"tema5_profili.pdf" },
+      { id:"t6",  title:"Društvene mreže i mozak",           icon:"🧠", key:"BALANS",   description:"Učimo kako društvene mreže utiču na naš mozak i emocije.", pdf:"tema6_drustvene_mreze.pdf" },
+      { id:"t7",  title:"Cyberbullying i pozitivna zajednica",icon:"💬", key:"HRABROST", description:"Borimo se protiv zlostavljanja na internetu i gradimo pozitivnu zajednicu.", pdf:"tema7_cyberbullying.pdf" },
+      { id:"t8",  title:"Lažne vesti i kritičko razmišljanje",icon:"🔍", key:"DETEKTIV", description:"Postajemo digitalni detektivi i učimo prepoznavati lažne informacije.", pdf:"tema8_lazne_vesti.pdf" },
+      { id:"t9",  title:"AI i deepfake",                     icon:"🤖", key:"ILUZIJA",  description:"Otkrivamo šta je veštačka inteligencija i kako prepoznati deepfake sadržaj.", pdf:"tema9_ai_deepfake.pdf" },
+      { id:"t10", title:"Reakcija na incident",              icon:"🚨", key:"HEROJ",    description:"Učimo šta uraditi kada se suočimo sa opasnom situacijom na internetu.", pdf:"tema10_incident.pdf" }
     ];
 
-    // Generate 4-character code
     function genCode(len) {
       const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
       let code = "";
-      for (let i = 0; i < len; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
+      for (let i = 0; i < len; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
       return code;
     }
 
-    // Get or create persistent QR code for topic/part
     function getPersistentCode(topicId, part) {
       const key = `qr_code_${topicId}_${part}`;
       let code = localStorage.getItem(key);
-      if (!code) {
-        code = genCode(4);
-        localStorage.setItem(key, code);
-      }
+      if (!code) { code = genCode(4); localStorage.setItem(key, code); }
       return code;
     }
 
-    // Build QR URL pointing to verify.html
+    
     function buildQrUrl(code) {
-      const verifyBase = "https://mujmej.github.io/quizzes/verify.html";
-      return verifyBase + "?code=" + encodeURIComponent(code);
+      return "https://mujmej.github.io/quizzes/verify.html?code=" + encodeURIComponent(code);
     }
 
-    // Show QR modal
     function showQR(topicId, part) {
       const topic = topics.find(t => t.id === topicId);
       if (!topic) return;
 
-      const code = getPersistentCode(topicId, part);
+      const code      = getPersistentCode(topicId, part);
       const qrDataUrl = buildQrUrl(code);
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrDataUrl)}`;
-      
-      document.getElementById("modalTitle").textContent = `${topic.icon} ${topic.title}`;
-      document.getElementById("modalSubtitle").textContent = `Kviz ${part === "A" ? "A (9-11 god)" : "B (12-15 god)"}`;
-      document.getElementById("qrImage").src = qrApiUrl;
-      document.getElementById("qrCode").textContent = code;
+      const qrApiUrl  = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrDataUrl)}`;
 
-     const quizUrl = `https://mujmej.github.io/quizzes/quiz.html?
-     topic=${topicId}&part=${part}&student=Edukator`;
-      document.getElementById("startQuizBtn").onclick = () => {
-        window.open(quizUrl, "_blank");
-      };
+      document.getElementById("modalTitle").textContent    = `${topic.icon} ${topic.title}`;
+      document.getElementById("modalSubtitle").textContent = `Kviz ${part === "A" ? "A (9–11 god)" : "B (11–15 god)"}`;
+      document.getElementById("qrImage").src               = qrApiUrl;
+      document.getElementById("qrCode").textContent        = code;
+
+      // 
+      const quizUrl = `https://mujmej.github.io/quizzes/quiz.html?topic=${topicId}&part=${part}&student=Edukator`;
+      document.getElementById("startQuizBtn").onclick = () => window.open(quizUrl, "_blank");
 
       document.getElementById("qrModal").style.display = "block";
     }
 
-    // Close modal
     document.querySelector(".modal-close").addEventListener("click", () => {
       document.getElementById("qrModal").style.display = "none";
     });
-
-    window.addEventListener("click", (e) => {
-      const modal = document.getElementById("qrModal");
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
+    window.addEventListener("click", e => {
+      if (e.target === document.getElementById("qrModal"))
+        document.getElementById("qrModal").style.display = "none";
     });
 
-    // Render topics
     function renderTopics() {
-      const container = document.getElementById("topicsContainer");
-      container.innerHTML = topics.map(topic => `
+      document.getElementById("topicsContainer").innerHTML = topics.map(t => `
         <div class="topic-card">
           <div class="topic-header">
-            <div class="topic-icon">${topic.icon}</div>
+            <div class="topic-icon">${t.icon}</div>
             <div class="topic-info">
-              <h3>${topic.title}</h3>
-              <span class="topic-key">🔑 Ključ: ${topic.key}</span>
+              <h3>${t.title}</h3>
+              <span class="topic-key">🔑 Ključ: ${t.key}</span>
             </div>
           </div>
-          <p class="topic-desc">${topic.description}</p>
+          <p class="topic-desc">${t.description}</p>
           <div class="topic-actions">
-            <a href="materials/${topic.pdf}" target="_blank" class="btn btn-primary">📄 Preuzmi PDF</a>
-            <button onclick="showQR('${topic.id}', 'A')" class="btn btn-secondary">🎯 Kviz A</button>
-            <button onclick="showQR('${topic.id}', 'B')" class="btn btn-outline">🎯 Kviz B</button>
+            <a href="materials/${t.pdf}" target="_blank" class="btn btn-primary">📄 Preuzmi PDF</a>
+            <button onclick="showQR('${t.id}','A')" class="btn btn-secondary">🎯 Kviz A</button>
+            <button onclick="showQR('${t.id}','B')" class="btn btn-outline">🎯 Kviz B</button>
           </div>
-        </div>
-      `).join("");
+        </div>`).join("");
     }
 
-    // Theme toggle
     const themeToggle = document.getElementById("themeToggle");
     const currentTheme = localStorage.getItem("theme") || "light";
     document.documentElement.setAttribute("data-theme", currentTheme);
     themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
-
     themeToggle.addEventListener("click", () => {
       const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", theme);
@@ -601,7 +320,6 @@
       themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
     });
 
-    // Initialize
     window.showQR = showQR;
     renderTopics();
   </script>

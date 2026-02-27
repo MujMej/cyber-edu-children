@@ -104,7 +104,7 @@ Nakon časa
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white)
 
-- Čisti vanilla JS — **bez frameworka, bez servera**
+- Čisti JS — **bez frameworka, bez servera**
 - QR generacija via [api.qrserver.com](https://api.qrserver.com)
 - Prezentacije u **PDF formatu** — rade na svim uređajima
 
